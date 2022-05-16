@@ -1,5 +1,7 @@
 package com.invoices.sum.calculator;
 
+import utils.csv.CsvFileReader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,12 +9,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import utils.csv.CsvFileReader;
+
 import static utils.processes.FileLineProcessingThread.isNumeric;
 
 public class InvoicesSumCalculatorSingleThreaded {
 
-    private static final String FILE_PATH = new File(Paths.get(".").toString(), "resources/invoices.csv").getAbsolutePath();
+    private static final String FILE_PATH = new File(Paths.get(".").toString(), "resources/test-invoices.csv").getAbsolutePath();
 
     public static void main(String[] args) {
 
@@ -29,7 +31,7 @@ public class InvoicesSumCalculatorSingleThreaded {
             long afterUsedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
             System.out.println("Reading took: " + ((endTime - startTime)) + " ms");
-            System.out.println("Memory used from a single thread: " +  ((afterUsedMemory - beforeUsedMemory) / 1024.0) + " MB");
+            System.out.println("Memory used from a single thread: " + ((afterUsedMemory - beforeUsedMemory) / 1024.0) + " MB");
 
         } catch (FileNotFoundException ex) {
             System.out.println(FILE_PATH + " does not exists!");
@@ -51,7 +53,14 @@ public class InvoicesSumCalculatorSingleThreaded {
                 // check if the sixth element is numeric (the invoice amount)
                 if (isNumeric(fileLine.get(5))) {
                     float invoiceAmount = Float.parseFloat(fileLine.get(5));
-                    sumOfAllInvoicesForCurrentThread += invoiceAmount;
+                    if (isNumeric(fileLine.get(4))) {
+                        float invoiceQuantity = Float.parseFloat(fileLine.get(4));
+                        sumOfAllInvoicesForCurrentThread += invoiceAmount * invoiceQuantity;
+                    } else {
+                        sumOfAllInvoicesForCurrentThread += invoiceAmount;
+                    }
+                    //simulate more complicated computational work
+                    // Thread.sleep(1);
                 } else {
                     if (fileLine.size() < 5) {
                         String lineContent = "[";

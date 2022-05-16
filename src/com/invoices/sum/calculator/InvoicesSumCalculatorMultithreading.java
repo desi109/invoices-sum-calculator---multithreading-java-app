@@ -12,7 +12,7 @@ import utils.processes.ResultFinalizationThread;
 
 public class InvoicesSumCalculatorMultithreading {
 
-    private static final String FILE_PATH = new File(Paths.get(".").toString(), "resources/invoices.csv").getAbsolutePath();
+    private static final String FILE_PATH = new File(Paths.get(".").toString(), "resources/test-invoices.csv").getAbsolutePath();
     private static final int NUM_THREADS = 6;
     private static CyclicBarrier barrier;
     private static List<Float> results = new ArrayList<>(NUM_THREADS);

@@ -37,7 +37,15 @@ public class FileLineProcessingThread extends Thread {
                 // check if the sixth element is numeric (the invoice amount)
                 if (isNumeric(fileLine.get(5))) {
                     float invoiceAmount = Float.parseFloat(fileLine.get(5));
-                    sumOfAllInvoicesForCurrentThread += invoiceAmount;
+                    if (isNumeric(fileLine.get(4))){
+                        float invoiceQuantity = Float.parseFloat(fileLine.get(4));
+                        sumOfAllInvoicesForCurrentThread += invoiceAmount * invoiceQuantity;
+                    } else {
+                        sumOfAllInvoicesForCurrentThread += invoiceAmount;
+                    }
+
+                    //simulate more complicated computational work
+                   // Thread.sleep(1);
                 } else {
                     if (fileLine.size() < 5) {
                         String lineContent = "[";
@@ -71,9 +79,7 @@ public class FileLineProcessingThread extends Thread {
         try {
             // the CyclicBarrier will wait for all FileLineProcessingThread to finish, before start the ResultConsolidationThread
             barrier.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace( );
-        } catch (BrokenBarrierException e) {
+        } catch (InterruptedException | BrokenBarrierException e) {
             e.printStackTrace();
         }
     }
