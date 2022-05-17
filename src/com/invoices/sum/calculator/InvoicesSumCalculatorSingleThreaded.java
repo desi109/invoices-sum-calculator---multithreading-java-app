@@ -7,14 +7,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import static utils.processes.FileLineProcessingThread.isNumeric;
+import utils.watcher.Watcher;
 
 public class InvoicesSumCalculatorSingleThreaded {
 
-    private static final String FILE_PATH = new File(Paths.get(".").toString(), "resources/test-invoices.csv").getAbsolutePath();
+    private static final String FILE_PATH = new File(Paths.get(".").toString(), "resources/invoices.csv").getAbsolutePath();
 
     public static void main(String[] args) {
 
@@ -24,13 +22,14 @@ public class InvoicesSumCalculatorSingleThreaded {
 
             // 2. Load and process the file invoices.csv
             CsvFileReader csvFileReader = new CsvFileReader(FILE_PATH);
-            long startTime = new Date().getTime();
+            Watcher watcher = new Watcher();
+            watcher.startTimeNanos();
             processPostsByLineSingleThreaded(csvFileReader);
-            long endTime = new Date().getTime();
+            watcher.endTimeNanos();
 
             long afterUsedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
-            System.out.println("Reading took: " + ((endTime - startTime)) + " ms");
+            System.out.println("Reading took: " + watcher.timeMillis() + " ms");
             System.out.println("Memory used from a single thread: " + ((afterUsedMemory - beforeUsedMemory) / 1024.0) + " MB");
 
         } catch (FileNotFoundException ex) {
@@ -39,7 +38,8 @@ public class InvoicesSumCalculatorSingleThreaded {
     }
 
     private static void processPostsByLineSingleThreaded(CsvFileReader csvFileReader) {
-        long start = new Date().getTime();
+        Watcher watcher = new Watcher();
+        watcher.startTimeNanos();
         int fileLinesSize = 0;
         float sumOfAllInvoicesForCurrentThread = 0.0f;
         List<String> fileLine = new ArrayList<>();
@@ -60,7 +60,7 @@ public class InvoicesSumCalculatorSingleThreaded {
                         sumOfAllInvoicesForCurrentThread += invoiceAmount;
                     }
                     //simulate more complicated computational work
-                    // Thread.sleep(1);
+                    Thread.sleep(1);
                 } else {
                     if (fileLine.size() < 5) {
                         String lineContent = "[";
@@ -81,14 +81,25 @@ public class InvoicesSumCalculatorSingleThreaded {
 
                 fileLine = csvFileReader.getCsvLine();
             }
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
-        long end = new Date().getTime();
-        System.out.println("Execution time for a single thread: " + (end - start) + " ms");
+        watcher.endTimeNanos();
+        System.out.println("Execution time for a single thread: " + watcher.timeMillis() + " ms");
         System.out.println("File lines size processed by a single thread: " + fileLinesSize);
         System.out.println("Invoices sum:  " + sumOfAllInvoicesForCurrentThread);
+    }
 
+    private static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            float f = Float.parseFloat(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }

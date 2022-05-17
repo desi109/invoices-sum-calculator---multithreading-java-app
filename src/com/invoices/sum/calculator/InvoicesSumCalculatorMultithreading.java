@@ -9,10 +9,11 @@ import java.util.concurrent.CyclicBarrier;
 import utils.csv.CsvFileReader;
 import utils.processes.FileLineProcessingThread;
 import utils.processes.ResultFinalizationThread;
+import utils.watcher.Watcher;
 
 public class InvoicesSumCalculatorMultithreading {
 
-    private static final String FILE_PATH = new File(Paths.get(".").toString(), "resources/test-invoices.csv").getAbsolutePath();
+    private static final String FILE_PATH = new File(Paths.get(".").toString(), "resources/invoices.csv").getAbsolutePath();
     private static final int NUM_THREADS = 6;
     private static CyclicBarrier barrier;
     private static List<Float> results = new ArrayList<>(NUM_THREADS);
@@ -29,13 +30,14 @@ public class InvoicesSumCalculatorMultithreading {
 
             // 2. Load and process the file invoices.csv
             CsvFileReader csvFileReader = new CsvFileReader(FILE_PATH);
-            long startTime = System.currentTimeMillis();
+            Watcher watcher = new Watcher();
+            watcher.startTimeNanos();
             processPostsByLineMultithreading(csvFileReader);
-            long endTime = System.currentTimeMillis();
+            watcher.endTimeNanos();
 
             long afterUsedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
-            System.out.println("Reading took: " + ((endTime - startTime)) + " ms");
+            System.out.println("Reading took: " + watcher.timeMillis() + " ms");
             System.out.println("Memory used for the for the whole multithreading program: " +  ((afterUsedMemory - beforeUsedMemory) / 1024.0) + " MB");
 
         } catch (FileNotFoundException ex) {

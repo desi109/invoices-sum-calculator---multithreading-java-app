@@ -1,0 +1,148 @@
+Comparing between different number of threads:
+===============================================
+
+
+1 thread - InvoicesSumCalculatorSingleThreaded.java
+-----------------------------------------------------
+Execution time for a single thread: 12146.699535 ms
+File lines size processed by a single thread: 10000
+Invoices sum:  2656788.2
+Reading took: 12176.839503 ms
+Memory used from a single thread: 43302.390625 MB
+
+
+
+2 threads - InvoicesSumCalculatorMultithreading.java
+------------------------------------------------------
+Reading took: 11.13696 ms
+Memory used for the for the whole multithreading program: 491.5390625 MB
+Execution time of thread Thread #1: 5939.425139 ms
+Execution time of thread Thread #2: 5938.511263 ms
+Sum of all invoices of thread Thread #2: 1331163.9
+Sum of all invoices of thread Thread #1: 1325630.8
+File lines size processed by thread Thread #2: 5001
+File lines size processed by thread Thread #1: 4999
+Result Finalization Thread started!
+Invoices sum: 2656788.2
+
+
+
+4 threads - InvoicesSumCalculatorMultithreading.java
+------------------------------------------------------
+Reading took: 16.212648 ms
+Memory used for the for the whole multithreading program: 1064.890625 MB
+Execution time of thread Thread #1: 2932.733991 ms
+Execution time of thread Thread #3: 2931.733848 ms
+Execution time of thread Thread #4: 2931.502864 ms
+Execution time of thread Thread #2: 2932.124885 ms
+Sum of all invoices of thread Thread #1: 661921.8
+Sum of all invoices of thread Thread #2: 662503.7
+Sum of all invoices of thread Thread #4: 663492.1
+Sum of all invoices of thread Thread #3: 668875.1
+File lines size processed by thread Thread #3: 2500
+File lines size processed by thread Thread #2: 2501
+File lines size processed by thread Thread #1: 2500
+File lines size processed by thread Thread #4: 2499
+Result Finalization Thread started!
+Invoices sum: 2656788.2
+
+
+
+6 threads - InvoicesSumCalculatorMultithreading.java
+------------------------------------------------------
+Reading took: 13.387816 ms
+Memory used for the for the whole multithreading program: 1556.46875 MB
+Execution time of thread Thread #3: 1910.341228 ms
+Execution time of thread Thread #2: 1910.547334 ms
+Execution time of thread Thread #1: 1912.254171 ms
+Execution time of thread Thread #4: 1911.321964 ms
+Execution time of thread Thread #6: 1911.113805 ms
+Execution time of thread Thread #5: 1910.678237 ms
+Sum of all invoices of thread Thread #6: 432005.88
+Sum of all invoices of thread Thread #4: 447387.16
+Sum of all invoices of thread Thread #3: 444153.97
+Sum of all invoices of thread Thread #2: 441764.03
+Sum of all invoices of thread Thread #5: 441018.1
+Sum of all invoices of thread Thread #1: 450464.12
+File lines size processed by thread Thread #6: 1661
+File lines size processed by thread Thread #1: 1666
+File lines size processed by thread Thread #3: 1668
+File lines size processed by thread Thread #2: 1673
+File lines size processed by thread Thread #4: 1662
+File lines size processed by thread Thread #5: 1670
+Result Finalization Thread started!
+Invoices sum: 2656788.2
+
+
+
+8 threads - InvoicesSumCalculatorMultithreading.java
+------------------------------------------------------
+Reading took: 16.824377 ms
+Memory used for the for the whole multithreading program: 3031.0703125 MB
+Execution time of thread Thread #8: 1437.133038 ms
+Execution time of thread Thread #7: 1437.670986 ms
+Execution time of thread Thread #3: 1436.997481 ms
+Execution time of thread Thread #6: 1436.932586 ms
+Execution time of thread Thread #4: 1438.037244 ms
+Execution time of thread Thread #1: 1437.094625 ms
+Execution time of thread Thread #2: 1438.199377 ms
+Execution time of thread Thread #5: 1438.009215 ms
+Sum of all invoices of thread Thread #1: 339764.88
+Sum of all invoices of thread Thread #2: 334265.56
+Sum of all invoices of thread Thread #8: 324815.06
+Sum of all invoices of thread Thread #3: 338719.12
+Sum of all invoices of thread Thread #4: 332552.62
+Sum of all invoices of thread Thread #6: 335678.06
+Sum of all invoices of thread Thread #7: 335720.66
+Sum of all invoices of thread Thread #5: 315277.06
+File lines size processed by thread Thread #8: 1243
+File lines size processed by thread Thread #7: 1253
+File lines size processed by thread Thread #6: 1248
+File lines size processed by thread Thread #1: 1252
+File lines size processed by thread Thread #2: 1250
+File lines size processed by thread Thread #3: 1251
+File lines size processed by thread Thread #5: 1247
+File lines size processed by thread Thread #4: 1256
+Result Finalization Thread started!
+Invoices sum: 2656788.2
+
+
+
+10 threads - InvoicesSumCalculatorMultithreading.java
+------------------------------------------------------
+Reading took: 13.635819 ms
+Memory used for the for the whole multithreading program: 3112.90625 MB
+Execution time of thread Thread #6: 1130.132833 ms
+Execution time of thread Thread #8: 1128.921756 ms
+Execution time of thread Thread #4: 1129.655975 ms
+Execution time of thread Thread #3: 1129.722024 ms
+Execution time of thread Thread #9: 1129.694425 ms
+Execution time of thread Thread #5: 1130.269559 ms
+Execution time of thread Thread #7: 1130.231167 ms
+Execution time of thread Thread #2: 1130.620691 ms
+Execution time of thread Thread #10: 1129.809512 ms
+Execution time of thread Thread #1: 1129.831789 ms
+Sum of all invoices of thread Thread #7: 269425.97
+Sum of all invoices of thread Thread #9: 262524.75
+Sum of all invoices of thread Thread #3: 273199.34
+Sum of all invoices of thread Thread #4: 261790.38
+Sum of all invoices of thread Thread #6: 277591.75
+Sum of all invoices of thread Thread #8: 260602.7
+Sum of all invoices of thread Thread #10: 261876.3
+Sum of all invoices of thread Thread #1: 263846.84
+Sum of all invoices of thread Thread #2: 259826.84
+Sum of all invoices of thread Thread #5: 266107.7
+File lines size processed by thread Thread #6: 1002
+File lines size processed by thread Thread #7: 1005
+File lines size processed by thread Thread #9: 989
+File lines size processed by thread Thread #2: 1006
+File lines size processed by thread Thread #10: 1000
+File lines size processed by thread Thread #5: 1002
+File lines size processed by thread Thread #4: 1002
+File lines size processed by thread Thread #3: 1008
+File lines size processed by thread Thread #8: 997
+File lines size processed by thread Thread #1: 989
+Result Finalization Thread started!
+Invoices sum: 2656788.2
+
+
