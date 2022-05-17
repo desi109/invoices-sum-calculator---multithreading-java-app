@@ -46,7 +46,7 @@ public class FileLineProcessingThread extends Thread {
                     }
 
                     //simulate more complicated computational work
-                    Thread.sleep(1);
+                    // Thread.sleep(1);
                 } else {
                     if (fileLine.size() < 5) {
                         String lineContent = "[";
@@ -67,7 +67,7 @@ public class FileLineProcessingThread extends Thread {
 
                 fileLine = csvFileReader.getCsvLine();
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

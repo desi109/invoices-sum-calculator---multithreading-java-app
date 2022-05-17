@@ -60,7 +60,7 @@ public class InvoicesSumCalculatorSingleThreaded {
                         sumOfAllInvoicesForCurrentThread += invoiceAmount;
                     }
                     //simulate more complicated computational work
-                    Thread.sleep(1);
+                    // Thread.sleep(1);
                 } else {
                     if (fileLine.size() < 5) {
                         String lineContent = "[";
@@ -81,7 +81,7 @@ public class InvoicesSumCalculatorSingleThreaded {
 
                 fileLine = csvFileReader.getCsvLine();
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
